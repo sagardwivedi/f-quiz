@@ -1,10 +1,10 @@
 export interface Option {
-  id: string;
-  answer: string;
+	id: string;
+	answer: string;
 }
 
 export interface Question {
-  question: string;
-  options: Option[];
-  correctAnswer: string;
+	question: string;
+	options: Option[];
+	correctAnswer: string;
 }

@@ -1,10 +1,10 @@
-import { Children, ReactNode, isValidElement } from "react";
+import { Children, type ReactNode, isValidElement } from "react";
 
 /**
  * Props for the Show component.
  */
 interface ShowProps {
-  children: ReactNode;
+	children: ReactNode;
 }
 
 /**
@@ -13,21 +13,21 @@ interface ShowProps {
  * @returns ReactNode - The rendered component.
  */
 export function Show({ children }: ShowProps): ReactNode {
-  let when: ReactNode | null = null;
-  let otherwise: ReactNode | null = null;
+	let when: ReactNode | null = null;
+	let otherwise: ReactNode | null = null;
 
-  Children.forEach(children, (child) => {
-    if (isValidElement(child)) {
-      const { isTrue } = child.props;
-      if (isTrue === undefined) {
-        otherwise = child;
-      } else if (!when && isTrue) {
-        when = child;
-      }
-    }
-  });
+	Children.forEach(children, (child) => {
+		if (isValidElement(child)) {
+			const { isTrue } = child.props;
+			if (isTrue === undefined) {
+				otherwise = child;
+			} else if (!when && isTrue) {
+				when = child;
+			}
+		}
+	});
 
-  return when || otherwise;
+	return when || otherwise;
 }
 
 Show.displayName = "Show";
@@ -36,8 +36,8 @@ Show.displayName = "Show";
  * Props for the ShowWhen component.
  */
 interface ShowWhenProps {
-  isTrue: boolean;
-  children: ReactNode;
+	isTrue: boolean;
+	children: ReactNode;
 }
 
 /**
@@ -52,8 +52,8 @@ Show.When = ({ isTrue, children }: ShowWhenProps) => isTrue && children;
  * Props for the ShowElse component.
  */
 interface ShowElseProps {
-  children?: ReactNode;
-  render?: ReactNode;
+	children?: ReactNode;
+	render?: ReactNode;
 }
 
 /**
