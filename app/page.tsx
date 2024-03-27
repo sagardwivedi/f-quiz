@@ -25,7 +25,7 @@ export default function Home() {
 					{SUBJECTS.map((subject) => (
 						<Link
 							key={subject.name}
-							href={`/subject/${subject.name.toLowerCase()}`}
+							href={`/${subject.name.toLowerCase()}`}
 							className="bg-secondary group p-3 rounded-lg shadow-sm flex flex-row items-center gap-5"
 						>
 							<div className="bg-primary/10 flex justify-center items-center size-12 rounded-sm">

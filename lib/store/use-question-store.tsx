@@ -3,12 +3,14 @@ import { create } from "zustand";
 interface State {
 	currentQuestionIndex: number;
 	selectedAnswers: string[];
+	showResult: boolean;
 }
 
 interface Action {
 	setCurrentQuestionIndex: (index: number) => void;
 	selectAnswer: (index: number, answer: string) => void;
 	resetQuiz: () => void;
+	setShowResult: () => void;
 }
 
 type QuizStateAndAction = State & Action;
@@ -16,6 +18,7 @@ type QuizStateAndAction = State & Action;
 export const useQuizStore = create<QuizStateAndAction>()((set) => ({
 	currentQuestionIndex: 0,
 	selectedAnswers: [],
+	showResult: false,
 	setCurrentQuestionIndex: (index) => set({ currentQuestionIndex: index }),
 	selectAnswer: (index, answer) =>
 		set((state) => ({
@@ -26,4 +29,5 @@ export const useQuizStore = create<QuizStateAndAction>()((set) => ({
 			],
 		})),
 	resetQuiz: () => set({ currentQuestionIndex: 0, selectedAnswers: [] }),
+	setShowResult: () => set((state) => ({ showResult: !state.showResult })),
 }));

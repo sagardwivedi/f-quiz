@@ -8,24 +8,20 @@ import { Show } from "@/components/Show";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useQuizStore } from "@/lib/store/use-question-store";
+import type { Question } from "@/lib/types/quizType";
 import { getQuestions } from "@/lib/utils";
 
 interface DisplayQuestionsProps {
-	name: string;
+	questions: Question[];
 }
 
-export function DisplayQuestions({ name }: DisplayQuestionsProps) {
-	const questions = getQuestions(name);
+export function DisplayQuestions({ questions }: DisplayQuestionsProps) {
 	const {
 		currentQuestionIndex,
 		selectAnswer,
 		selectedAnswers,
 		setCurrentQuestionIndex,
 	} = useQuizStore();
-
-	if (!questions) {
-		return notFound();
-	}
 
 	const handleNextQuestion = () => {
 		if (currentQuestionIndex < questions.length - 1) {
@@ -40,20 +36,20 @@ export function DisplayQuestions({ name }: DisplayQuestionsProps) {
 	const question = questions[currentQuestionIndex];
 
 	return (
-		<section className="flex flex-col gap-10 md:flex-row">
+		<section className="flex flex-col gap-16 md:flex-row">
 			<Show>
-				<Show.When isTrue={currentQuestionIndex < questions.length}>
+				<Show.When isTrue={currentQuestionIndex < questions.length - 1}>
 					<div className="md:w-1/2 md:h-[500px]">
 						<p className="font-light">
-							Question {currentQuestionIndex + 1} of {questions.length}
+							Question {currentQuestionIndex + 1} of {questions.length - 1}
 						</p>
 						<div className="md:h-[280px] gap-5 flex flex-col justify-between">
 							<h1 className="md:text-3xl mt-4 md:mt-8 text-xl font-semibold leading-tight">
 								{question.question}
 							</h1>
 							<Progress
-								value={(currentQuestionIndex + 1) * 10}
-								max={questions.length * 10}
+								value={(currentQuestionIndex + 2) * 10}
+								max={(questions.length - 1) * 10}
 							/>
 						</div>
 					</div>
@@ -67,7 +63,7 @@ export function DisplayQuestions({ name }: DisplayQuestionsProps) {
 							/>
 						))}
 						<Button onClick={handleNextQuestion} className="w-full" size={"lg"}>
-							{currentQuestionIndex === questions.length - 1
+							{currentQuestionIndex + 1 === questions.length - 1
 								? "Submit"
 								: "Next"}
 						</Button>
