@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Layout, ModeToggle } from "@/components";
 import { SUBJECTS } from "@/lib/data";
+import FrontendQuizHeader from "@/components/QuizHeader";
 
 export default function Home() {
   return (
@@ -11,10 +12,10 @@ export default function Home() {
       </section>
       <section className="flex flex-col gap-10 md:flex-row">
         <div className="md:w-1/2">
-          <h1 className="md:text-5xl text-4xl leading-tight">
-            <span className="font-extralight">Welcome to the</span>{" "}
-            <span className="font-bold text-primary">Frontend Quiz!</span>
-          </h1>
+          <FrontendQuizHeader
+            firstPart="Welcome to the"
+            secondPart="Frontend Quiz!"
+          />
           <p className="font-light text-sm mt-4 md:mt-8">
             Pick a subject to get started.
           </p>

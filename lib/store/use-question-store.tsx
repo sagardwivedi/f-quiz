@@ -2,25 +2,28 @@ import { create } from "zustand";
 
 interface State {
   currentQuestionIndex: number;
-  results: string[];
+  selectedAnswers: string[];
 }
 
-interface Actions {
+interface Action {
   setCurrentQuestionIndex: (index: number) => void;
-  answerQuestion: (result: string) => void;
+  selectAnswer: (index: number, answer: string) => void;
+  resetQuiz: () => void;
 }
 
-// Initial state
-const initialState: State = {
-  currentQuestionIndex: 0,
-  results: [],
-};
+type QuizStateAndAction = State & Action;
 
-// Create store
-export const useQuestionStore = create<State & Actions>()((set) => ({
-  ...initialState,
-  setCurrentQuestionIndex: (index: number) =>
-    set({ currentQuestionIndex: index }),
-  answerQuestion: (result: string) =>
-    set((state) => ({ results: [...state.results, result] })),
+export const useQuizStore = create<QuizStateAndAction>()((set) => ({
+  currentQuestionIndex: 0,
+  selectedAnswers: [],
+  setCurrentQuestionIndex: (index) => set({ currentQuestionIndex: index }),
+  selectAnswer: (index, answer) =>
+    set((state) => ({
+      selectedAnswers: [
+        ...state.selectedAnswers.slice(0, index),
+        answer,
+        ...state.selectedAnswers.slice(index + 1),
+      ],
+    })),
+  resetQuiz: () => set({ currentQuestionIndex: 0, selectedAnswers: [] }),
 }));
