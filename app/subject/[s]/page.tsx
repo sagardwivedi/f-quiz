@@ -1,4 +1,5 @@
-import { Layout, ModeToggle } from "@/components";
+import { Layout } from "@/components/Layout";
+import { ModeToggle } from "@/components/mode-toggle";
 import { DisplayQuestions } from "@/components/Question";
 import { getSubject } from "@/lib/utils";
 import { notFound } from "next/navigation";

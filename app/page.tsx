@@ -1,7 +1,8 @@
 import Link from "next/link";
 
-import { Layout, ModeToggle } from "@/components";
+import { Layout } from "@/components/Layout";
 import FrontendQuizHeader from "@/components/QuizHeader";
+import { ModeToggle } from "@/components/mode-toggle";
 import { SUBJECTS } from "@/lib/data";
 
 export default function Home() {
