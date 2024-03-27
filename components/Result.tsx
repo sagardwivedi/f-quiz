@@ -35,7 +35,7 @@ export const ResultPage = ({ questions, selectedAnswers }: ResultPageProps) => {
 			<div className="w-full">
 				<div className="bg-secondary md:w-full h-[400px] rounded-md flex flex-col justify-center items-center">
 					<p className="text-8xl mb-5 text-primary">{correctAnswers}</p>
-					<span className="text-gray-500">out of {questions.length}</span>
+					<span className="text-gray-500">out of {questions.length - 1}</span>
 				</div>
 				<Button onClick={handleClick} className="mt-5 w-full" size={"lg"}>
 					Play Again
