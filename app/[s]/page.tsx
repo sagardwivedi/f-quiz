@@ -8,31 +8,38 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { getQuestions, getSubject } from "@/lib/utils";
 
+export async function generateMetadata({ params }: { params: { s: string } }) {
+  const capitalizeTitle = params.s.charAt(0).toUpperCase() + params.s.slice(1);
+  return {
+    title: capitalizeTitle,
+  };
+}
+
 export default function TestPage({ params }: { params: { s: string } }) {
-	const subject = getSubject(params.s);
-	const questions = getQuestions(params.s);
+  const subject = getSubject(params.s);
+  const questions = getQuestions(params.s);
 
-	if (!subject || !questions) {
-		return notFound();
-	}
+  if (!subject || !questions) {
+    return notFound();
+  }
 
-	return (
-		<Layout>
-			<section className="flex flex-row items-center justify-between">
-				<div className="flex flex-row gap-4">
-					<Button asChild size={"icon"} className="size-8" variant={"ghost"}>
-						<Link href="/">
-							<ArrowLeft />
-						</Link>
-					</Button>
-					<div className="flex flex-row items-center gap-4">
-						{subject.icon}
-						<p>{subject.name}</p>
-					</div>
-				</div>
-				<ModeToggle />
-			</section>
-			<DisplayQuestions questions={questions} />
-		</Layout>
-	);
+  return (
+    <Layout>
+      <section className="flex flex-row items-center justify-between">
+        <div className="flex flex-row gap-4">
+          <Button asChild size={"icon"} className="size-8" variant={"ghost"}>
+            <Link href="/">
+              <ArrowLeft />
+            </Link>
+          </Button>
+          <div className="flex flex-row items-center gap-4">
+            {subject.icon}
+            <p>{subject.name}</p>
+          </div>
+        </div>
+        <ModeToggle />
+      </section>
+      <DisplayQuestions questions={questions} />
+    </Layout>
+  );
 }
